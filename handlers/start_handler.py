@@ -1,9 +1,8 @@
-from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import CommandHandler, CallbackContext
 
-@Client.on_message(filters.command("start"))
-async def start(client, message: Message):
-    first_name = message.from_user.first_name
+def start(update: Update, context: CallbackContext):
+    first_name = update.effective_user.first_name
     text = (
         "**Welcome to Movie Insider File Bot**\n\n"
         "🙊𝙸 𝙲𝙰𝙽 𝚂𝙴𝙰𝚁𝙲𝙷 𝙼𝙾𝚅𝙸𝙴𝚂 & 𝚂𝙴𝚁𝙸𝙴𝚂 𝙵𝙾𝚁 𝚈𝙾𝚄\n"
@@ -19,5 +18,11 @@ async def start(client, message: Message):
         [InlineKeyboardButton("Support", url="https://t.me/MOVIE_INSIDER1")],
         [InlineKeyboardButton("About Developer", callback_data="about_dev")]
     ])
-    
-    await message.reply(text, reply_markup=buttons)
+
+    update.message.reply_text(
+        text,
+        reply_markup=buttons,
+        parse_mode="Markdown"
+    )
+
+start_handler = CommandHandler("start", start)
