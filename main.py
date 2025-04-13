@@ -6,9 +6,12 @@ from handlers.start_handler import start_handler
 from handlers.query_handler import query_handler
 from handlers.force_join import force_join_handler
 from handlers.query_handler import handle_user_query
+from utils.logger import log_client
 dp.add_handler(MessageHandler(Filters.text & ~Filters.command("start"), handle_user_query))
 
 def main():
+    log_client.start()  # Start Pyrogram logging client
+    
     updater = Updater(token=BOT_TOKEN, use_context=True)
     dp = updater.dispatcher
 
