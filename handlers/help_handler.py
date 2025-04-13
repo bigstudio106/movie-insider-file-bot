@@ -1,8 +1,8 @@
-from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import CommandHandler, CallbackContext
 
-@Client.on_message(filters.command("help"))
-async def help(client, message: Message):
+# Help command handler
+async def help(update: Update, context: CallbackContext):
     text = (
         "Hey! 👋 You're using **Movie Insider File Bot**\n\n"
         "I can search for **Movies** & **Series** for you!\n"
@@ -13,9 +13,13 @@ async def help(client, message: Message):
         "📢 **Support:** [@MOVIE_INSIDER1](https://t.me/MOVIE_INSIDER1)"
     )
     
-    buttons = InlineKeyboardMarkup([
+    buttons = [
         [InlineKeyboardButton("Support", url="https://t.me/MOVIE_INSIDER1")],
         [InlineKeyboardButton("About Developer", callback_data="about_dev")]
-    ])
+    ]
+    
+    # Send the help message with buttons
+    await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
 
-    await message.reply(text, reply_markup=buttons)
+# Register the handler
+help_handler = CommandHandler("help", help)
