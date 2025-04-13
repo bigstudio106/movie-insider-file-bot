@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+env/
+
+# VS Code settings
+.vscode/
+
+# Mac OS files
+.DS_Store
+
+# Logs
+*.log
+
+# PyCharm files
+.idea/
+
+# MongoDB dump files
+dump/
+
+# Token/credential backup files
+*.bak
+*.old
