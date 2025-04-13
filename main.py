@@ -5,6 +5,8 @@ from config import BOT_TOKEN
 from handlers.start_handler import start_handler
 from handlers.query_handler import query_handler
 from handlers.force_join import force_join_handler
+from handlers.query_handler import handle_user_query
+dp.add_handler(MessageHandler(Filters.text & ~Filters.command("start"), handle_user_query))
 
 def main():
     updater = Updater(token=BOT_TOKEN, use_context=True)
